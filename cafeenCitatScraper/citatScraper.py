@@ -1,3 +1,4 @@
+#coding=utf8
 import urllib.request
 import subprocess
 import PyPDF2
@@ -8,7 +9,7 @@ import time
 
 #Initial load of webpage to see number of iterations
 fp = urllib.request.urlopen("http://www.cafeen.org/")
-mystr = fp.read().decode("unicode_escape").encode('utf-8').decode("utf-8").split('\n')
+mystr = fp.read().decode(errors = 'ignore').split('\n')
 
 
 #Regular expressions to search for
@@ -36,8 +37,8 @@ while True:
 	except Exception as e:
 		continue
 	
-	mystr = fp.read().decode("unicode_escape").encode('utf-8').decode("utf-8").split('\n')
-
+	mystr = fp.read().decode(errors = 'ignore').split('\n')
+	
 	for index, line in enumerate(mystr):
 		if 'class="citat"' in line:
 			citat       = str(mystr[index+5:index+6])
